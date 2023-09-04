@@ -5,6 +5,16 @@ const readYamlFile = require('read-yaml-file')
 
 const patterns = ['**/application-*.yaml', '**/application-*.properties']
 
+const flatten = (obj, path = '') => {
+    if (!(obj instanceof Object)) return {[path.replace(/\.$/g, '')]:obj};
+
+    return Object.keys(obj).reduce((output, key) => {
+        return obj instanceof Array ?
+             {...output, ...flatten(obj[key], path +  '[' + key + '].')}:
+             {...output, ...flatten(obj[key], path + key + '.')};
+    }, {});
+}
+
 async function run() {
   try {
     const configServerUrl = core.getInput('config-server-url');
@@ -14,7 +24,8 @@ async function run() {
     const globber = await glob.create(patterns.join('\n'))
     const files =  await globber.glob()
     const data = readYamlFile.sync(files[0])
-    console.log(data)
+
+    console.log(flatten(data))
     // files.forEach((item, i) => {
     //   console.log(item)
     // });
