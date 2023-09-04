@@ -1,10 +1,10 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  config-server-url:  # id of input
+    description: 'remote configuration server'
     required: true
-    default: 'World'
+    default: 'http://localhost:8888/configuration-service/1.0.0/properties'
 outputs:
   time: # id of output
     description: 'The time we greeted you'
