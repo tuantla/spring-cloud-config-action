@@ -9814,8 +9814,8 @@ const github = __nccwpck_require__(8427);
 try {
 
   const configServerUrl = core.getInput('config-server-url');
-  const workingDir = ` ${ github.workspace } `
-  console.log(`migrate from ${ workingDir } config server: ${configServerUrl}!`);
+  const workingDir = core.getInput('workspace')
+  console.log(`migrate from ${ workspace } config server: ${configServerUrl}!`);
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
   // Get the JSON webhook payload for the event that triggered the workflow
