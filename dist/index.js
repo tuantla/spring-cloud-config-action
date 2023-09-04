@@ -9814,7 +9814,7 @@ const github = __nccwpck_require__(8427);
 try {
 
   const configServerUrl = core.getInput('config-server-url');
-  const workingDir = ` ${GITHUB_WORKSPACE}`
+  const workingDir = ` ${ github.workspace } `
   console.log(`migrate from ${ workingDir } config server: ${configServerUrl}!`);
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
