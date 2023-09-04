@@ -1,6 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const glob = require('@actions/glob');
+const readYamlFile = require('read-yaml-file')
+
 const patterns = ['**/application-*.yaml', '**/application-*.properties']
 
 async function run() {
@@ -11,9 +13,11 @@ async function run() {
 
     const globber = await glob.create(patterns.join('\n'))
     const files =  await globber.glob()
-    files.forEach((item, i) => {
-      console.log(item)
-    });
+    const data = readYamlFile.sync(files[0])
+    console.log(data)
+    // files.forEach((item, i) => {
+    //   console.log(item)
+    // });
 
 
     const time = (new Date()).toTimeString();
