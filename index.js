@@ -3,7 +3,7 @@ const github = require('@actions/github');
 
 try {
 
-  const configServerUrl = core.getInput('configServerUrl');
+  const configServerUrl = core.getInput('config-server-url');
   console.log(`config server: ${configServerUrl}!`);
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);

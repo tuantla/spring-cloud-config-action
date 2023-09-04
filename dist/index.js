@@ -9813,7 +9813,7 @@ const github = __nccwpck_require__(8427);
 
 try {
 
-  const configServerUrl = core.getInput('configServerUrl');
+  const configServerUrl = core.getInput('config-server-url');
   console.log(`config server: ${configServerUrl}!`);
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
