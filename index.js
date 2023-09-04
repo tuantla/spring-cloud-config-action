@@ -4,7 +4,7 @@ const github = require('@actions/github');
 try {
 
   const configServerUrl = core.getInput('config-server-url');
-  const workingDir = core.getInput('workspace')
+  const workspace = core.getInput('workspace')
   console.log(`migrate from ${ workspace } config server: ${configServerUrl}!`);
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
