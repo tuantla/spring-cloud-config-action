@@ -1,6 +1,9 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
+  workspace:
+    description: git local working directory
+    required: true
   config-server-url:  # id of input
     description: 'remote configuration server'
     required: true
