@@ -4,7 +4,8 @@ const github = require('@actions/github');
 try {
 
   const configServerUrl = core.getInput('config-server-url');
-  console.log(`config server: ${configServerUrl}!`);
+  const workingDir = `${github.workspace }`
+  console.log(`migrate from ${ workingDir } config server: ${configServerUrl}!`);
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
   // Get the JSON webhook payload for the event that triggered the workflow
