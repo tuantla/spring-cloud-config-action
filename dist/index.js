@@ -16433,7 +16433,7 @@ class ConfigMigration {
 
     const globber = await glob.create(patterns.join('\n'))
     this.files =  await globber.glob()
-    await this.migrateSingleFile(this.files[1])
+    await this.migrate(this.files)
 
   }
 
