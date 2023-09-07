@@ -50,7 +50,7 @@ class ConfigMigration {
     console.log(`${env}:${service} => ${file}`)
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
-    let resp = await httm.postJson(this.url, {}, {})
+    let resp = await httpm.postJson(this.url, {}, {})
     console.log(resp)
     for(let key of keys) {
        await this.updateConfigItem(env, service, key, properties[key])
