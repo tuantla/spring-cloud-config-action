@@ -37,8 +37,9 @@ class ConfigMigration {
   }
 
   async migrateSingleFile(file) {
+    console.log(typeof(file))
     const data = readYamlFile.sync(file)
-    console.log(flatten(data))
+    //console.log(flatten(data))
   }
 }
 
