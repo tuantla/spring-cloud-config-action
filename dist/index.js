@@ -16422,14 +16422,13 @@ const flatten = (obj, path = '') => {
 }
 
 class ConfigMigration {
-  constructor(workingDir, url, files) {
-    return this.init(workingDir, url, files)
+  constructor(workingDir, url) {
+    return this.init(workingDir, url)
   }
 
   async init(workingDir, url) {
     this.workingDir = workingDir
     this.url = url
-    this.files = files
 
     const globber = await glob.create(patterns.join('\n'))
     this.files =  await globber.glob()
