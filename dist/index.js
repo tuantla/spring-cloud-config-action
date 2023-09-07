@@ -16456,7 +16456,7 @@ class ConfigMigration {
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
     for(let key of keys) {
-       await this.updateConfigItem(env, service, key, properties[key])
+       //await this.updateConfigItem(env, service, key, properties[key])
     }
 
   }
