@@ -16421,20 +16421,31 @@ const flatten = (obj, path = '') => {
     }, {});
 }
 
+class ConfigMigration {
+  constructor(workingDir, url, files) {
+    return this.init(workingDir, url, files)
+  }
+
+  async init(workingDir, url) {
+    this.workingDir = workingDir
+    this.url = url
+    this.files = files
+
+    const globber = await glob.create(patterns.join('\n'))
+    this.files =  await globber.glob()
+    const data = readYamlFile.sync(files[0])
+
+    console.log(flatten(data))
+  }
+}
+
 async function run() {
   try {
     const configServerUrl = core.getInput('config-server-url');
     const workspace = core.getInput('workspace')
     console.log(`migrate from ${ workspace } config server: ${configServerUrl}!`);
 
-    const globber = await glob.create(patterns.join('\n'))
-    const files =  await globber.glob()
-    const data = readYamlFile.sync(files[0])
-
-    console.log(flatten(data))
-    // files.forEach((item, i) => {
-    //   console.log(item)
-    // });
+    const migra = await new ConfigMigration(workspace, configServerUrl)
 
 
     const time = (new Date()).toTimeString();
