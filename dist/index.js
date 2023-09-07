@@ -16432,8 +16432,18 @@ class ConfigMigration {
 
     const globber = await glob.create(patterns.join('\n'))
     this.files =  await globber.glob()
-    const data = readYamlFile.sync(this.files[0])
+    await this.migrateSingleFile(this.files[1])
 
+  }
+
+  async migrate() {
+    for(let file of this.files) {
+      await this.migrateSingleFile(file)
+    }
+  }
+
+  async migrateSingleFile(file) {
+    const data = readYamlFile.sync(file)
     console.log(flatten(data))
   }
 }
