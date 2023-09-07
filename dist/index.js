@@ -16432,6 +16432,7 @@ class ConfigMigration {
     this.entityId = entityId
     this.workingDir = workingDir
     this.url = url
+    this.http = new httpm.HttpClient('http-client-github-actions')
 
     const globber = await glob.create(patterns.join('\n'))
     this.files =  await globber.glob()
@@ -16456,7 +16457,7 @@ class ConfigMigration {
     console.log(`${env}:${service} => ${file}`)
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
-    let resp = await httpm.postJson(this.url, {}, {})
+    let resp = await this.http.postJson(this.url, {}, {})
     console.log(resp)
     for(let key of keys) {
        await this.updateConfigItem(env, service, key, properties[key])
