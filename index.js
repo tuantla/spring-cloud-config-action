@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const glob = require('@actions/glob');
+const httpm = require('@actions/http-client');
 const readYamlFile = require('read-yaml-file')
 const path = require('path')
 
@@ -49,8 +50,10 @@ class ConfigMigration {
     console.log(`${env}:${service} => ${file}`)
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
+    let resp = await httm.postJson(this.url, {}, {})
+    console.log(resp)
     for(let key of keys) {
-       //await this.updateConfigItem(env, service, key, properties[key])
+       await this.updateConfigItem(env, service, key, properties[key])
     }
 
   }

@@ -16407,6 +16407,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(1648);
 const github = __nccwpck_require__(8427);
 const glob = __nccwpck_require__(6354);
+const httpm = __nccwpck_require__(4328);
 const readYamlFile = __nccwpck_require__(354)
 const path = __nccwpck_require__(1017)
 
@@ -16455,8 +16456,10 @@ class ConfigMigration {
     console.log(`${env}:${service} => ${file}`)
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
+    let resp = await httm.postJson(this.url, {}, {})
+    console.log(resp)
     for(let key of keys) {
-       //await this.updateConfigItem(env, service, key, properties[key])
+       await this.updateConfigItem(env, service, key, properties[key])
     }
 
   }
