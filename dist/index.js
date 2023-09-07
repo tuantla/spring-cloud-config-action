@@ -16463,7 +16463,7 @@ class ConfigMigration {
   getEnvironment(file) {
     let fileName = path.basename(file)
     console.log(fileName)
-    let re = new RegExp('/application-?(.*).ya?ml/');
+    let re = new RegExp(/application-?(.*).ya?ml/,"i");
     let r = fileName.match(re)
     return r[1]
   }
