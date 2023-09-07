@@ -42,15 +42,23 @@ class ConfigMigration {
     let env = this.getEnvironment(file)
     let service = this.getServiceName(file)
     await this.updateConfigItems(env, service, file)
-    //console.log(this.getServiceName(file))
-    // console.log(path.dirname(file))
-    // const data = readYamlFile.sync(file)
-    //console.log(flatten(data))
+
   }
 
   async updateConfigItems(env, service, file){
     console.log(`${env}:${service} => ${file}`)
+    let properties = flatten(readYamlFile.sync(file))
+    let keys = Object.keys(properties)
+    for(let key of keys) {
+       await this.updateConfigItem(env, service, key, properties[key])
+    }
+
   }
+
+  async updateConfigItem(env, service, key, value ){
+    console.log(`${env}:${service}:  ${key}=>${value}`)
+  }
+
 
   getServiceName(file) {
     let parentFolder = path.dirname(file)
@@ -63,7 +71,6 @@ class ConfigMigration {
 
   getEnvironment(file) {
     let fileName = path.basename(file)
-    console.log(fileName)
     let re = new RegExp(/application-?(.*)\.ya?ml/,"i");
     let r = fileName.match(re)
     return r[1]
