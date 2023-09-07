@@ -16432,7 +16432,7 @@ class ConfigMigration {
 
     const globber = await glob.create(patterns.join('\n'))
     this.files =  await globber.glob()
-    const data = readYamlFile.sync(files[0])
+    const data = readYamlFile.sync(this.files[0])
 
     console.log(flatten(data))
   }
