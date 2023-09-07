@@ -16457,7 +16457,7 @@ class ConfigMigration {
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
     let http = new httpm.HttpClient('http-client-github-actions')
-    let resp = await http.postJson(this.url, {}, {})
+    let resp = await http.postJson('http://postman-echo.com/post', {}, {})
     console.log(resp)
     for(let key of keys) {
        await this.updateConfigItem(env, service, key, properties[key])
