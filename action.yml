@@ -8,6 +8,10 @@ inputs:
     description: 'remote configuration server'
     required: true
     default: 'http://localhost:8888/configuration-service/1.0.0/properties'
+  entity-id:
+    description: 'service provider'
+    required: true
+    default: 'ADB'
 outputs:
   time: # id of output
     description: 'The time we greeted you'

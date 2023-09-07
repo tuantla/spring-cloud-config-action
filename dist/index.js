@@ -16423,11 +16423,12 @@ const flatten = (obj, path = '') => {
 }
 
 class ConfigMigration {
-  constructor(workingDir, url) {
-    return this.init(workingDir, url)
+  constructor(entityId, workingDir, url) {
+    return this.init(entityId, workingDir, url)
   }
 
-  async init(workingDir, url) {
+  async init(entityId, workingDir, url) {
+    this.entityId = entityId
     this.workingDir = workingDir
     this.url = url
 
@@ -16479,7 +16480,8 @@ async function run() {
   try {
     const configServerUrl = core.getInput('config-server-url');
     const workspace = core.getInput('workspace')
-    console.log(`migrate from ${ workspace } config server: ${configServerUrl}!`);
+    const entityId = core.getInput('entity-id')
+    console.log(`migrate config of ${entityId} from ${ workspace } config server: ${configServerUrl}!`);
 
     const migra = await new ConfigMigration(workspace, configServerUrl)
 
