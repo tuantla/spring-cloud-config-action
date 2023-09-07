@@ -84,7 +84,7 @@ async function run() {
     const entityId = core.getInput('entity-id')
     console.log(`migrate config of ${entityId} from ${ workspace } config server: ${configServerUrl}!`);
 
-    const migra = await new ConfigMigration(workspace, configServerUrl)
+    const migra = await new ConfigMigration(entityId, workspace, configServerUrl)
 
 
     const time = (new Date()).toTimeString();
