@@ -51,7 +51,7 @@ class ConfigMigration {
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
     let http = new httpm.HttpClient('http-client-github-actions')
-    let resp = await http.post('http://192.168.1.203:8888/configuration-service/1.0.0/properties', {}, {})
+    let resp = await http.post('http://host.docker.internal:8888/configuration-service/1.0.0/properties', {}, {})
     console.log(resp)
     for(let key of keys) {
        await this.updateConfigItem(env, service, key, properties[key])
