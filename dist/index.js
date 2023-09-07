@@ -16444,9 +16444,27 @@ class ConfigMigration {
   }
 
   async migrateSingleFile(file) {
-    console.log(path.dirname(file))
-    const data = readYamlFile.sync(file)
+    console.log(this.getEnvironment(file))
+    console.log(this.getServiceName(file))
+    // console.log(path.dirname(file))
+    // const data = readYamlFile.sync(file)
     //console.log(flatten(data))
+  }
+
+  getServiceName(file) {
+    let parentFolder = path.dirname(file)
+    if (this.workingDir == parentFolder) {
+      return '*'
+    } else {
+      return path.basename(parentFolder)
+    }
+  }
+
+  getEnvironment(file) {
+    let fileName = path.basename(file)
+    let re = new RegExp('/application-?(.*).ya?ml/');
+    let r = fileName.match(re)
+    return r[1]
   }
 }
 
