@@ -50,7 +50,7 @@ class ConfigMigration {
     console.log(`${env}:${service} => ${file}`)
     let properties = flatten(readYamlFile.sync(file))
     let keys = Object.keys(properties)
-    http = new httpm.HttpClient('http-client-github-actions')
+    let http = new httpm.HttpClient('http-client-github-actions')
     let resp = await http.postJson(this.url, {}, {})
     console.log(resp)
     for(let key of keys) {
