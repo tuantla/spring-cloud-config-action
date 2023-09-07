@@ -16408,6 +16408,7 @@ const core = __nccwpck_require__(1648);
 const github = __nccwpck_require__(8427);
 const glob = __nccwpck_require__(6354);
 const readYamlFile = __nccwpck_require__(354)
+const path = __nccwpck_require__(1017)
 
 const patterns = ['**/application-*.yaml', '**/application-*.properties']
 
@@ -16443,7 +16444,7 @@ class ConfigMigration {
   }
 
   async migrateSingleFile(file) {
-    console.log(typeof(file))
+    console.log(path.dirname(file))
     const data = readYamlFile.sync(file)
     //console.log(flatten(data))
   }

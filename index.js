@@ -2,6 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const glob = require('@actions/glob');
 const readYamlFile = require('read-yaml-file')
+const path = require('path')
 
 const patterns = ['**/application-*.yaml', '**/application-*.properties']
 
@@ -37,7 +38,7 @@ class ConfigMigration {
   }
 
   async migrateSingleFile(file) {
-    console.log(typeof(file))
+    console.log(path.dirname(file))
     const data = readYamlFile.sync(file)
     //console.log(flatten(data))
   }
