@@ -38,11 +38,17 @@ class ConfigMigration {
   }
 
   async migrateSingleFile(file) {
-    console.log(this.getEnvironment(file))
+    let env = this.getEnvironment(file)
+    let service = this.getServiceName(file)
+    await this.updateConfigItems(env, service, file)
     //console.log(this.getServiceName(file))
     // console.log(path.dirname(file))
     // const data = readYamlFile.sync(file)
     //console.log(flatten(data))
+  }
+
+  async updateConfigItems(env, service, file){
+    console.log(`${env}:${service} => ${file}`)
   }
 
   getServiceName(file) {
